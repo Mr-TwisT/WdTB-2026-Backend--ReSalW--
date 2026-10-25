@@ -11,9 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Reguła R1.01 sprawdza, czy to zrobiliście.
  */
 @SpringBootApplication
-public class resalwApplication {
+public class ResalwApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(resalwApplication.class, args);
+        SpringApplication.run(ResalwApplication.class, args);
     }
 }
