@@ -15,7 +15,7 @@ VALUES
     ('Sala C', 'KOMPUTEROWA', 15, FALSE, 150.00);
 
 -- ===== LAB 03 · GrupaJezykowa =====
-INSERT INTO GrupaJezykowa
+INSERT INTO grupa_jezykowa
 (nazwa_grupy, jezyk, poziom, lektor, maks_uczestnikow)
 VALUES
     ('Angielski C1 - wieczorna', 'angielski', 'C1', 'Anna Zielinska', 12),

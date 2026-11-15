@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "GrupaJezykowa")
+@Table(name = "grupa_jezykowa")
 public class GrupaJezykowa {
 
     @Id
