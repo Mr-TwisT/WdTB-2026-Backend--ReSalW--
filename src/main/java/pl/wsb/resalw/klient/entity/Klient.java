@@ -2,6 +2,32 @@ package pl.wsb.resalw.klient.entity;
 
 import jakarta.persistence.*;
 
+@Embeddable
+class InformacjeKontaktowe {
+
+    @Column(name = "adres", nullable = false, length = 150)
+    private String adres;
+
+    @Column(name = "telefon", nullable = false, length = 15)
+    private String telefon;
+
+    protected InformacjeKontaktowe() {
+    }
+
+    public InformacjeKontaktowe(String adres, String telefon) {
+        this.adres = adres;
+        this.telefon = telefon;
+    }
+
+    public String getAdres() {
+        return adres;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+}
+
 @Entity
 @Table(name = "Klient")
 public class Klient {
@@ -19,17 +45,18 @@ public class Klient {
     @Column(name = "email", nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(name = "telefon", nullable = false, length = 15)
-    private String telefon;
+    @Embedded
+    private InformacjeKontaktowe informacjeKontaktowe;
 
-    public Klient(String imie, String nazwisko, String email, String telefon) {
+    protected Klient() {
+    }
+
+    public Klient(String imie, String nazwisko, String email,
+                  String adres, String telefon) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.email = email;
-        this.telefon = telefon;
-    }
-
-    protected Klient() {
+        this.informacjeKontaktowe = new InformacjeKontaktowe(adres, telefon);
     }
 
     public String getImie() {
@@ -44,7 +71,7 @@ public class Klient {
         return email;
     }
 
-    public String getTelefon() {
-        return telefon;
+    public InformacjeKontaktowe getInformacjeKontaktowe() {
+        return informacjeKontaktowe;
     }
 }
