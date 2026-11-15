@@ -1,6 +1,7 @@
 package pl.wsb.resalw.zajecia.entity;
 
 import jakarta.persistence.*;
+import pl.wsb.resalw.grupa.entity.GrupaJezykowa;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -29,15 +30,25 @@ public class Zajecia {
     @Column(name = "cena", nullable = false, precision = 10, scale = 2)
     private BigDecimal cena;
 
-    public Zajecia(String nazwaZajec, LocalDate dataZajec, LocalTime godzinaRozpoczecia, LocalTime godzinaZakonczenia, BigDecimal cena) {
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "grupa_id", nullable = false)
+    private GrupaJezykowa grupa;
+
+    protected Zajecia() {
+    }
+
+    public Zajecia(String nazwaZajec, LocalDate dataZajec, LocalTime godzinaRozpoczecia,
+                   LocalTime godzinaZakonczenia, BigDecimal cena, GrupaJezykowa grupa) {
         this.nazwaZajec = nazwaZajec;
         this.dataZajec = dataZajec;
         this.godzinaRozpoczecia = godzinaRozpoczecia;
         this.godzinaZakonczenia = godzinaZakonczenia;
         this.cena = cena;
+        this.grupa = grupa;
     }
 
-    protected Zajecia() {
+    public Long getId() {
+        return id;
     }
 
     public String getNazwaZajec() {
@@ -58,5 +69,9 @@ public class Zajecia {
 
     public BigDecimal getCena() {
         return cena;
+    }
+
+    public GrupaJezykowa getGrupa() {
+        return grupa;
     }
 }

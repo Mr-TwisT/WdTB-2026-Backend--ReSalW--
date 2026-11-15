@@ -28,6 +28,9 @@ public class Sala {
     @Column(name = "cena_za_godzine", nullable = false, precision = 10, scale = 2)
     private BigDecimal cenaZaGodzine;
 
+    protected Sala() {
+    }
+
     public Sala(String nazwaSali, TypSali typSali, Integer liczbaMiejsc,
                 Boolean dostepna, BigDecimal cenaZaGodzine) {
         this.nazwaSali = nazwaSali;
@@ -35,6 +38,10 @@ public class Sala {
         this.liczbaMiejsc = liczbaMiejsc;
         this.dostepna = dostepna;
         this.cenaZaGodzine = cenaZaGodzine;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public TypSali getTypSali() {

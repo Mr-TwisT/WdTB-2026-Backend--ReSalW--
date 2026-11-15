@@ -1,6 +1,11 @@
 package pl.wsb.resalw.klient.entity;
 
 import jakarta.persistence.*;
+import pl.wsb.resalw.account.domain.UserAccount;
+import pl.wsb.resalw.grupa.entity.GrupaJezykowa;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Embeddable
 class InformacjeKontaktowe {
@@ -48,6 +53,16 @@ public class Klient {
     @Embedded
     private InformacjeKontaktowe informacjeKontaktowe;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_account_id", unique = true)
+    private UserAccount account;
+
+    @ManyToMany
+    @JoinTable(name = "grupa_klient",
+            joinColumns = @JoinColumn(name = "klient_id"),
+            inverseJoinColumns = @JoinColumn(name = "grupa_id"))
+    private Set<GrupaJezykowa> grupy = new HashSet<>();
+
     protected Klient() {
     }
 
@@ -57,6 +72,10 @@ public class Klient {
         this.nazwisko = nazwisko;
         this.email = email;
         this.informacjeKontaktowe = new InformacjeKontaktowe(adres, telefon);
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getImie() {
@@ -73,5 +92,13 @@ public class Klient {
 
     public InformacjeKontaktowe getInformacjeKontaktowe() {
         return informacjeKontaktowe;
+    }
+
+    public UserAccount getAccount() {
+        return account;
+    }
+
+    public Set<GrupaJezykowa> getGrupy() {
+        return grupy;
     }
 }
